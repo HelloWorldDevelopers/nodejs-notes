@@ -6,8 +6,6 @@ const app=express();
 app.use(express.json())
 module.exports.signUp= async(req,res)=>{
  
-    console.log(req.body);
-
     const newUser = new User(req.body);
     console.log(newUser);
     if(!newUser){
