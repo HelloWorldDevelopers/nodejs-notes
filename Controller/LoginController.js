@@ -35,6 +35,7 @@ module.exports.signUp= async(req,res)=>{
 module.exports.signIn= async(req,res)=>{
 
       const {email,password}=req.body;
+      console.log(email,password);
       const userData=await User.findOne({
          email:email,password:password
         });
@@ -42,19 +43,23 @@ module.exports.signIn= async(req,res)=>{
 
        if(!userData){
         res.status(404).json({
-            "message":"you are not authorised"
+            data:null,
+            message:"you are not authorised",
+            success:false
         })
-    }
+    }else{
     const payload = {
         email: userData.email,
         fName: userData.fName,
         lName: userData.lName
      };
-    console.log(userData.email)
-   const genratedToken=tokenFunction.tokenCreationAfterLogin(payload)
+    const genratedToken=tokenFunction.tokenCreationAfterLogin(payload)
     res.send({
-        token:genratedToken
+        token:genratedToken,
+        userId:userData._id,
+        success:true
     })
+}       
 
 };
 module.exports.tokenParse= async(req,res)=>{
