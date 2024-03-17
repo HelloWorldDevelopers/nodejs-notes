@@ -12,7 +12,11 @@ module.exports.addNote= async (req,res)=>{
      });
       saveNote.notes.push({userId:userId})
      const note=await saveNote.save();
-     res.status(200).json({data:"adsf"})
+     if(!note){
+         res.status(200).json({success:false})
+    }else{
+        res.status(201).json({success:true})
+    }
 }
 
 module.exports.getAll=async (req,res)=>{
@@ -33,7 +37,7 @@ module.exports.deleteNote=async (req,res)=>{
 }
 else{
     res.send({
-        delete:true
+        success:true
     })
 }
 }
