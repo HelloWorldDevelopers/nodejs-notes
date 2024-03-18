@@ -5,9 +5,15 @@ const express = require("express")
 const app = express();
 app.use(express.json())
 module.exports.signUp = async (req, res) => {
-    const newUser = new User(req.body);
-    console.log(newUser);
-    if (!newUser) {
+    const newUser = new User({
+        fName:req.body.fName,
+        lName:req.body.lName,
+        password:req.body.password,
+        email:req.body.email,
+        age:req.body.age
+    });
+ 
+      if (!newUser) {
         res.send(
             {
                 message: "some fileds are null",
