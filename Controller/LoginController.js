@@ -2,7 +2,7 @@ const User = require('../Model/UserModel')
 const tokenFunction = require('../JWT/Token');
 const { json } = require('body-parser');
 const express = require("express")
-const app = express();
+const app = express(); 
 app.use(express.json())
 module.exports.signUp = async (req, res) => {
     const newUser = new User({
